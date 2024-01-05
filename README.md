@@ -21,6 +21,7 @@ Welcome to the Weather App, your go-to source for real-time weather information!
 
 ## Screenshots 📷
 
+![Weather App Screenshot]("C:\Users\Thenmozhi\Pictures\Screenshots\Screenshot 2024-01-05 225309.png")
 
 
 ## Technologies Used 💻
