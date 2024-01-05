@@ -1,4 +1,4 @@
-# Weather App 🌦️
+# Weather Detection 🌦️
 
 Welcome to the Weather App, your go-to source for real-time weather information! Get accurate weather details for any city around the world with just a few clicks.
 
@@ -21,7 +21,7 @@ Welcome to the Weather App, your go-to source for real-time weather information!
 
 ## Screenshots 📷
 
-![Weather App Screenshot](screenshots/weather-app-screenshot.png)
+
 
 ## Technologies Used 💻
 
@@ -29,14 +29,6 @@ Welcome to the Weather App, your go-to source for real-time weather information!
 - CSS
 - JavaScript
 - [OpenWeatherMap API](https://openweathermap.org/api) for weather data
-
-## Contributing 🤝
-
-Contributions are welcome! Feel free to open an issue or submit a pull request.
-
-## License 📄
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
 ## Acknowledgments 🙏
 
