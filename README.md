@@ -21,8 +21,8 @@ Welcome to the Weather App, your go-to source for real-time weather information!
 
 ## Screenshots 📷
 
-![Weather App Screenshot](![Screenshot 2024-01-05 225309](https://github.com/Thenmozhi-k/Weather-detection/assets/126195333/052a6b45-d93a-45bd-b5ad-1bd2f4c0a1f5)
-)
+(![Screenshot 2024-01-05 225309](https://github.com/Thenmozhi-k/Weather-detection/assets/126195333/052a6b45-d93a-45bd-b5ad-1bd2f4c0a1f5)
+
 
 
 ## Technologies Used 💻
