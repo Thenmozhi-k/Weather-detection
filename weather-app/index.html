@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Weather App</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="https://kit.fontawesome.com/376c280226.js" crossorigin="anonymous"></script>
+</head>
+<body>
+  <div class="card">
+    <div class="search">
+      <input type="text" id="cityInput" placeholder="Enter city name" spellcheck="false">
+      <button onclick="getWeather()"><i class="fas fa-search"></i></button>
+    </div>
+
+    <div class="weather">
+      <img src="images/sunny-removebg-preview.png" class="weather-icon" id="weatherIcon">
+      <h1 class="temp" id="temperature">Loading...</h1>
+      <h2 class="city" id="cityName">Fetching Location...</h2>
+      <div class="details">
+        <div class="col">
+          <img src="images/humidity-removebg-preview.png">
+          <div>
+            <p class="humidity" id="humidity">Loading...</p>
+            <p>Humidity</p>
+          </div>
+        </div>
+
+        <div class="col">
+          <img src="images/wind.png">
+          <div>
+            <p class="wind-speed" id="windSpeed">Loading...</p>
+            <p>Wind Speed</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <h5 class="error-message" id="errorMessage"></h5>
+  </div>
+
+  <!-- Replace 'YOUR_API_KEY' with your actual OpenWeatherMap API key -->
+  <script>
+    const apiKey = '7dba0c97532436081c02d45a5ffeb137';
+
+    // Fetch weather for current location on page load
+    window.addEventListener('load', () => {
+      if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(position => {
+          const { latitude, longitude } = position.coords;
+          fetchWeatherByCoordinates(latitude, longitude);
+        }, error => {
+          console.error('Error getting current location:', error);
+          displayErrorMessage('Error getting current location. Please enter a city name.');
+        });
+      } else {
+        displayErrorMessage('Geolocation is not supported by this browser. Please enter a city name.');
+      }
+    });
+
+    function getWeather() {
+      const cityInput = document.getElementById('cityInput').value;
+
+      if (cityInput.trim() === '') {
+        displayErrorMessage('Please enter a city name.');
+        return;
+      }
+
+      fetchWeatherByCity(cityInput);
+    }
+
+    function fetchWeatherByCoordinates(latitude, longitude) {
+      fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&appid=${apiKey}`)
+        .then(response => response.json())
+        .then(displayWeather)
+        .catch(error => {
+          console.error('Error fetching weather data:', error);
+          displayErrorMessage('Weather data not available. Please try again.');
+        });
+    }
+
+    function fetchWeatherByCity(city) {
+      fetch(`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}`)
+        .then(response => response.json())
+        .then(displayWeather)
+        .catch(error => {
+          console.error('Error fetching weather data:', error);
+          displayErrorMessage('Weather data not available. Please try again.');
+        });
+    }
+
+    function displayWeather(data) {
+      const weatherIcon = document.getElementById('weatherIcon');
+      const temperature = document.getElementById('temperature');
+      const cityName = document.getElementById('cityName');
+      const humidity = document.getElementById('humidity');
+      const windSpeed = document.getElementById('windSpeed');
+      const errorMessage = document.getElementById('errorMessage');
+
+      // Clear previous error message
+      //errorMessage.textContent = 'Please enter correct data';
+
+      weatherIcon.src = `http://openweathermap.org/img/wn/${data.weather[0].icon}.png`;
+      temperature.textContent = `${Math.round(data.main.temp - 273.15)}°C`;
+      cityName.textContent = data.name;
+      humidity.textContent = `${data.main.humidity}%`;
+      windSpeed.textContent = `${data.wind.speed} m/s`;
+    }
+
+    function displayErrorMessage(message) {
+      const errorMessage = document.getElementById('errorMessage');
+      errorMessage.textContent = message;
+
+      // Clear other weather details
+      document.getElementById('weatherIcon').src = '';
+      document.getElementById('cityName').textContent = '';
+      document.getElementById('humidity').textContent = '';
+      document.getElementById('windSpeed').textContent = '';
+    }
+  </script>
+
+ 
+</body>
+</html>
